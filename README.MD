@@ -91,3 +91,29 @@ const retornarObjeto = () => ({
 	name: 'Miltinho'
 }) 
 ```
+
+---
+
+## Aula 02: Parameters default
+
+No JS moderno, podemos definir parametros padão para nossas funções, para contextos em que precisamos de um valor padrão caso algum parâmetro não seja fornecido pelo usuário ou acessado pela função. 
+
+Veja:
+
+```jsx
+const boasVindas(mensagem = "Mensagem padrão") {
+	console.log(mensagem);
+}
+
+```
+
+Com o código acima, caso a função `boasvindas()` seja chamada e não possuir uma mensagem, a string "Mensagem padão" será logada automaticamente. Essa á sintaxe incluída pelo ES6, para situações como a apresentada.
+
+Anteriormente, para manipular situações iguais a essa era necessário fazer validações e criar códigos verbosos. Veja:
+
+```jsx
+const boasVindas(mensagem) {
+	console.log(mensagem ? mensagem : "Mensagem padrão";
+}
+
+```
