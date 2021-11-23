@@ -179,3 +179,60 @@ const { firstName, age, skills, full_name: fullName } = user;
 
 console.log(fullName); //RETORNA Milton Soares
 ```
+
+---
+
+## **Aula 04: Rest Operator**
+
+Dado o objeto:
+
+```jsx
+const user = {
+  firstName: 'Milton',
+  lastName: 'Soares',
+  full_name: 'Milton Soares',
+  age: 25,
+  instagram: '@soaresmiltinho',
+  skills: ['Back-end', 'Front-end', 'Mobile', 'UI/UX']
+};
+```
+
+Imagine a situação em que necessita-se que o desenvolvedor atribua o primeiro nome e as habilidades de um usuário em suas respectivas variáveis, e as demais propriedades desse objeto (user) em um outro local. Como podemos fazer isso?
+
+```jsx
+const user = {
+  firstName: 'Milton',
+  lastName: 'Soares',
+  full_name: 'Milton Soares',
+  age: 25,
+  instagram: '@soaresmiltinho',
+  skills: ['Back-end', 'Front-end', 'Mobile', 'UI/UX']
+};
+
+const { firstName, skills, ...demaisPropreidades } = user;
+const [primary] = skills;
+
+console.log( firstName, primary, demaisPropreidades );
+```
+
+Nessa situação podemos aplicar a desestruturação para salvar as propriedades específicas em suas determinadas variáveis e utilizar o *spread operator* `...`  para atribuir as demais propriedades do objeto em uma variável separada. Nesse caso essa variável está denominada como "demaisPropriedades". Podemos acessar as demais propriedades desse objeto utilizando a forma tradicional de acesso de propriedades de objetos em JS.
+
+**OBSERVAÇÕES DO REST OPERATOR:**
+
+O *rest operator* é muito flexível e utilizado em diversos casos durante desenvolvimento. No caso da desestruturação de objetos, como visto anteriormente, podemos usar o nome da variável conforme nossa necessidade.
+
+A única regra para aplicar o rest operator em desestruturações de objeto, é que a variável que irá receber o restante das propriedades, ou seja, que irá receber o rest operator, deve **SER O ÚLTIMO ELEMENTO** da desestruturação.
+
+✅ **PERMITIDO:**
+
+```jsx
+const { firstName, skills, ...demaisPropreidades } = user;
+```
+
+❌ **NÃO PERMITIDO:**
+
+```jsx
+const { ...demaisPropreidades, firstName, skills } = user;
+```
+
+Para Arrays, o rest operator funciona da mesma maneira que a apresentada para objetos.
