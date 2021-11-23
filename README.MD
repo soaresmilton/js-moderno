@@ -113,7 +113,69 @@ Anteriormente, para manipular situações iguais a essa era necessário fazer va
 
 ```jsx
 const boasVindas(mensagem) {
-	console.log(mensagem ? mensagem : "Mensagem padrão";
+	console.log(mensagem ? mensagem : "Mensagem padrão");
 }
 
+```
+
+ --- 
+
+## Aula 03:  Destructuring
+
+**Desestruturando objetos:**
+
+Desestruturando propriedades de um objeto JS e alocando em variáveis cujo nome são iguais as chaves do objeto:
+
+```jsx
+const user = {
+  firstName: 'Milton',
+  lastName: 'Soares',
+  age: 25,
+  instagram: '@soaresmiltinho',
+  skills: ['Back-end', 'Front-end', 'Mobile', 'UI/UX']
+};
+
+const { firstName, age } = user;
+
+console.log(firstName, age); //RETORNA Milton 25
+```
+
+**Desestruturando arrays:**
+
+Alocando os valores de determinado array em constantes:
+
+```jsx
+const user = {
+  firstName: 'Milton',
+  lastName: 'Soares',
+  age: 25,
+  instagram: '@soaresmiltinho',
+  skills: ['Back-end', 'Front-end', 'Mobile', 'UI/UX']
+};
+
+const { firstName, age, skills } = user;
+const [primary, secondary, tertiary, quaternary] = skills;
+
+console.log(primary); //RETORNA Back-end
+```
+
+**Renomeando as variáveis**
+
+Suponhamos que precisamos desestruturar as propreidades de um objeto e atribuí-las em variáveis. Porém, considere que, ao fazer a desestruturação dessas propriedades, precisamos alterar o nome das variáveis. Como fazer isso? 
+
+Abaixo, alteramos o nome da propriedade *full_name* do objeto user para o nome *fullName.* Nota-se que para fazer essa mudança de nomes nas variáveis, nós simplesmente fazemos uma associação do tipo objeto entre o nome da propriedade e o nome que queremos dar à variável.
+
+```jsx
+const user = {
+  firstName: 'Milton',
+  lastName: 'Soares',
+	full_name: 'Milton Soares',
+  age: 25,
+  instagram: '@soaresmiltinho',
+  skills: ['Back-end', 'Front-end', 'Mobile', 'UI/UX']
+};
+
+const { firstName, age, skills, full_name: fullName } = user;
+
+console.log(fullName); //RETORNA Milton Soares
 ```
