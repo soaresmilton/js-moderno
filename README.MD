@@ -236,3 +236,113 @@ const { ...demaisPropreidades, firstName, skills } = user;
 ```
 
 Para Arrays, o rest operator funciona da mesma maneira que a apresentada para objetos.
+
+---
+
+## Aula 05: Spread Operator
+
+- A sintaxe do *spread operator* é exatamente a mesma que a do *rest operator.* Representada por `...`
+
+Mas então, qual a diferença entre ambos? Pra que serve o *spread operator*?
+
+Para entender melhor essa estratégia, considere o objeto:
+
+```jsx
+const user = {
+  firstName: 'Milton',
+  lastName: 'Soares',
+  age: 25,
+  instagram: '@soaresmiltinho',
+  skills: ['Back-end', 'Front-end', 'Mobile', 'UI/UX'],
+  active: false,
+};
+```
+
+Agora, imagine a situação que precisamos mudar o status da propriedade active de `false` para `true` . Como podemos fazer isso?
+
+Primeiramente podemos fazer isso de forma forçada, alterando diretamente a propriedade active para true. Veja:
+
+```jsx
+user.active = true;
+console.log(user); 
+/* RETORNA
+ {
+  firstName: 'Milton',
+  lastName: 'Soares',
+  age: 25,
+  instagram: '@soaresmiltinho',
+  skills: ['Back-end', 'Front-end', 'Mobile', 'UI/UX'],
+  active: true,
+}
+*/
+```
+
+Beleza, conseguimos alterar o status do nosso usuário. Mas, qual o problema de fazer dessa forma?
+
+Dessa forma, estamos quebrando princípio da imutabilidade, muito presente em frameworks como o React. 
+
+Esse princípio, como o nome sugere, literalmente diz que não devemos mudar o dado original de determinada estrutura.
+
+Então, como podemos melhorar essa atribuição, sem modificar nosso objeto original ? Usando o *spread operator.* 
+
+Veja uma forma legal de fazer isso, seguindo o princípio da imutabilidade e utilizando o *spread operator*:
+
+```jsx
+const updatedUser = { 
+	...user,
+	active: true,
+};
+console.log(updatedUser);
+
+/* RETORNA
+ {
+  firstName: 'Milton',
+  lastName: 'Soares',
+  age: 25,
+  instagram: '@soaresmiltinho',
+  skills: ['Back-end', 'Front-end', 'Mobile', 'UI/UX'],
+  active: true,
+}
+*/
+```
+
+Veja que usando o *spread operator* criamos uma cópia do objeto original, permitindo fazer a mudança de status do usuário, sem alterar o objeto original, respeitando o princípio da imutabilidade. Para checar a veracidade, basta um log no objeto user:
+
+```jsx
+console.log({ user });
+
+/* RETORNA
+ {
+  firstName: 'Milton',
+  lastName: 'Soares',
+  age: 25,
+  instagram: '@soaresmiltinho',
+  skills: ['Back-end', 'Front-end', 'Mobile', 'UI/UX'],
+  active: false,
+}
+*/
+```
+
+ **OBSERVAÇÕES DO SPREAD OPERATOR:**
+
+- No spread operator, não respeita a regra de ser o último elemento da desestruturação (como visto em *rest operator*)
+- Funciona da mesma forma em arrays
+
+```jsx
+const updatedUser = {
+  ...user,
+  skills: [...user.skills, 'Vendas'],
+  active: true
+};
+
+console.log(updatedUser);
+/* RETORNA
+ {
+  firstName: 'Milton',
+  lastName: 'Soares',
+  age: 25,
+  instagram: '@soaresmiltinho',
+  skills: ['Back-end', 'Front-end', 'Mobile', 'UI/UX', 'Vendas'],
+  active: false,
+}
+```
