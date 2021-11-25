@@ -348,4 +348,26 @@ console.log(updatedUser);
 ```
 
 ---
+## Aula 06: Template Strings
 
+Template strings são as crases e são usadas para interpolar variáveis ou expressões  JS com strings de texto. Além disso permite que quebremos um console.log - por exemplo -  em duas ou mais linhas, ao contrário das aspas simples ou duplas em que isso não é permitido.
+
+Na prática:
+
+```jsx
+const person = {
+  firstName: 'Miltinho',
+  lastName: 'Soares'
+}
+
+const { firstName, lastName } = person;
+
+console.log(`Seja bem vindo ${firstName} ${lastName}!
+Seu último login: ${new Date()}
+`);
+/*
+RETORNA 
+Seja bem vindo Miltinho Soares!
+Seu último login: Thu Nov 25 2021 17:19:32 GMT-0300 (Brasilia Standard Time)
+*/
+```
