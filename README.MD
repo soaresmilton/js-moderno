@@ -521,4 +521,90 @@ Depois da promise...
 
 O `log` após a promise executou primeiro, não esperando a promise ser resolvida para executar o restante de código.
 
-- Portanto, em situações que precisamos do valor da Promise, como uma chamada API, por exemplo, não podemos utilizar esse tipo de estratégia. Portanto, utilizaremos o método do async / await para fazer chamadas em DB e chamadas na API
+- Portanto, em situações que precisamos do valor da Promise, como uma chamada API, por exemplo, não podemos utilizar esse tipo de estratégia. Portanto, utilizaremos o método do async / await para fazer chamadas em DB e chamadas na API.
+
+---
+
+## Aula 08: ES Modules
+
+Com o advento do ES6, o JavaScript recebeu uma nova forma de lidar com os modules do Node.
+
+A nova forma de lidar com módulos muda a sintaxe do código escrito em JS e faz necessário algumas configurações para que o Node entenda o como trabalhar com essa nova forma.
+
+Em código, suponha uma pasta chamada modules contendo os seguintes arquivos: index.js, sayHello.js e package.json
+
+o Arquivo sayHello.js é nosso módulo, que vamos querer usar em demais lugares de nossa aplicação. o index.js é o arquivo principal do nosso APP e o package.json são as configurações padrão.
+
+Sendo assim, temos que:
+
+**sayHello.js:**
+
+```jsx
+function sayHello(name) {
+  console.log(`Ola ${name}`);
+}
+
+export default sayHello;
+```
+
+**index.js:**
+
+```jsx
+import sayHello from './sayHello.js'
+
+sayHello('Miltinho');
+```
+
+**package.json:**
+
+```json
+{
+  "type": "module"
+}
+```
+
+Para essa sintaxe de importação e exportação de módulos é necessário configurar o *type module* no arquivo de configuração JSON.
+
+### Formas de exportar o modulo:
+
+```jsx
+function sayHello(name) {
+  console.log(`Ola ${name}`);
+}
+
+export default sayHello;
+```
+
+```jsx
+export default function sayHello(name) {
+  console.log(`Ola ${name}`);
+}
+
+```
+
+```jsx
+function sayHello(name) {
+  console.log(`Ola ${name}`);
+}
+
+export { sayHello };
+```
+
+Dessa última forma, nos obriga a fazer a importação de forma desestruturada:
+
+```jsx
+import { sayHello } from './sayHello.js'
+
+sayHello('Miltinho');
+```
+
+ou
+
+```jsx
+
+import { sayHello as novoNomeDaFuncao } from './sayHello.js'
+
+novoNomeDaFuncao('Miltinho');
+```
+
+---
