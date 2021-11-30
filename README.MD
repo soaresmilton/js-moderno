@@ -829,3 +829,31 @@ RETORNA
 }
 */
 ```
+
+--- 
+
+## Aula 13: HOFs - .filter()
+
+O método `.filter()` retorna um **array** com todos os elementos do array que satisfazem a condição passada dentro da callback function. 
+
+```jsx
+const array = [
+  { name: 'iPhone', price: 5000, quantity: 2 },
+  { name: 'MacBook Pro', price: 20000, quantity: 1 },
+  { name: 'Magic Mouse', price: 1000, quantity: 5 }
+];
+
+const filter = array.filter((product) => {
+  return product.price > 1000;
+ });
+
+console.log(filter); 
+
+/*RETORNA
+[
+  { name: 'iPhone', price: 5000, quantity: 2 },
+  { name: 'MacBook Pro', price: 20000, quantity: 1 }
+]
+
+*/
+```
