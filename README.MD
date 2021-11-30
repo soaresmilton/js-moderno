@@ -674,3 +674,82 @@ const tech = "Node.js";
 const endsWith = tech.endsWith('.js');
 console.log({ endsWith }); // RETORNA { endsWith: true }
 ```
+
+--- 
+
+## Aula 10: High Order Functions
+
+### .find()
+
+Busca uma uma informação dentro de um array;
+
+Essencialmente, essa função recebe como parâmetro uma função *callback:*
+
+```jsx
+const array = [
+  { name: 'iPhone', price: 5000, quantity: 2 },
+  { name: 'MacBook Pro', price: 20000, quantity: 1 },
+  { name: 'Magic Mouse', price: 1000, quantity: 5 }
+];
+
+const find = array.find((product) => {
+  console.log(product);
+});
+
+/* RETORNA
+
+{ product: 'iPhone', price: 5000, quantity: 2 }
+{ product: 'MacBook Pro', price: 20000, quantity: 1 }
+{ product: 'Magic Mouse', price: 1000, quantity: 5 }
+
+*/
+
+```
+
+O find busca elementos com base em uma condição estruturada dentro de sua callback function e retorna o elemento que satisfaça a condição da callback. Se a condição for satisfeita, o método `.find()` retorna o próprio valor: 
+
+```jsx
+const array = [
+  { name: 'iPhone', price: 5000, quantity: 2 },
+  { name: 'MacBook Pro', price: 20000, quantity: 1 },
+  { name: 'Magic Mouse', price: 1000, quantity: 5 }
+];
+
+//.find 
+const find = array.find((product) => {
+  return product.name === 'Magic Mouse';
+});
+
+console.log(find); //RETORNA {name: 'Magic Mouse', price: 1000, quantity: 5 }
+```
+
+É importante destacar que, caso a condição passada para a callback function do método `.find()` seja satisfeita por mais de 1 valor do array, o método retornará apenas o valor do primeiro elemento em que foi retornado *true:*
+
+```jsx
+const array = [
+  { name: 'iPhone', price: 5000, quantity: 2 },
+  { name: 'MacBook Pro', price: 20000, quantity: 1 },
+  { name: 'Magic Mouse', price: 1000, quantity: 5 }
+];
+
+//.find 
+const find = array.find((product) => {
+  return product.price > 1000;
+});
+
+console.log(find); //RETORNA { name: 'iPhone', price: 5000, quantity: 2 }
+```
+
+### .findIndex()
+
+O método `.findIndex()` **funciona da mesma maneira que o o método find, porém quando a condição da função callback for satisfeita o método `.findIndex()` retorna o número do índice do primeiro elemento que retornou true:
+
+```jsx
+const array = [
+  { name: 'iPhone', price: 5000, quantity: 2 },
+  { name: 'MacBook Pro', price: 20000, quantity: 1 },
+  { name: 'Magic Mouse', price: 1000, quantity: 5 }
+];
+const findIndex = array.findIndex(product => product.name === 'Magic Mouse');
+console.log(findIndex); //RETORNA 2
+```
