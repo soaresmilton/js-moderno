@@ -794,3 +794,38 @@ const array = [
 const every = array.every(product => product.price < 1000);
 console.log({ every }); // RETORNA { some: false }
 ```
+
+---
+
+## Aula 12: HOFs - .map()
+
+O método `.map()` serve para nós pegarmos um array em determinado "estado" e modificar esse array de acordo com alguma especificação passada para a função callback recebida dentro do `.map()`
+
+Esse método **sempre** retornará um array modificado com o mesmo número de elementos do array original.
+
+```jsx
+const array = [
+  { name: 'iPhone', price: 5000, quantity: 2 },
+  { name: 'MacBook Pro', price: 20000, quantity: 1 },
+  { name: 'Magic Mouse', price: 1000, quantity: 5 }
+];
+
+const map = array.map((product) => (
+  {
+    ...product,
+    subtotal: product.quantity * product.price
+  }
+))
+
+console.log({ map });
+/*
+RETORNA
+{
+  map: [
+    { name: 'iPhone', price: 5000, quantity: 2, subtotal: 10000 },
+    { name: 'MacBook Pro', price: 20000, quantity: 1, subtotal: 20000 },
+    { name: 'Magic Mouse', price: 1000, quantity: 5, subtotal: 5000 }
+  ]
+}
+*/
+```
