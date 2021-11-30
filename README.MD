@@ -753,3 +753,6 @@ const array = [
 const findIndex = array.findIndex(product => product.name === 'Magic Mouse');
 console.log(findIndex); //RETORNA 2
 ```
+
+---
+

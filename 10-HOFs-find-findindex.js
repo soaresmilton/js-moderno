@@ -9,4 +9,4 @@ const find = array.find(product => product.name === 'Magic Mouse');
 
 //.findIndex
 const findIndex = array.findIndex(product => product.name === 'Magic Mouse');
-console.log(findIndex)
+console.log(findIndex);
