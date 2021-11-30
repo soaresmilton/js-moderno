@@ -857,3 +857,29 @@ console.log(filter);
 
 */
 ```
+
+---
+
+## Aula 14: Reduce
+
+O método `.reduce()` tem a ideia de transformar o array em outro tipo de dado, retornando sempre um valor único, reduzindo o array original com base em uma condição dentro da callback function.
+
+Sua callback function é diferente das demais HOFs, podendo receber três parametros (*accumulator, currtentValue, index (opcional)*), além de que a própria função do *reduce* aceita um segundo argumento, sendo ele o *currentIndex* (opcional).
+
+Um exemplo muito utilizado nesse tipo de método é para somar elementos de um array. Veja:
+
+Suponha que precisamos somar o preço de todos os produtos contidos no nosso array, ao mesmo tempo que multiplicamos o preço pela quantidade:
+
+```jsx
+const array = [
+  { name: 'iPhone', price: 5000, quantity: 2 },
+  { name: 'MacBook Pro', price: 20000, quantity: 1 },
+  { name: 'Magic Mouse', price: 1000, quantity: 5 }
+];
+
+const reduce = array.reduce((accumulator, product, index) => {
+  return accumulator += product.quantity * product.price;
+}, 0)
+
+console.log({ reduce }); //RETORNA { reduce: 35000 }
+```
