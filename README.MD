@@ -371,3 +371,154 @@ Seja bem vindo Miltinho Soares!
 Seu último login: Thu Nov 25 2021 17:19:32 GMT-0300 (Brasilia Standard Time)
 */
 ```
+
+---
+
+## Aula 07: Promises
+
+### Principais características das promises:
+
+- Usa construtor new para ser declarada
+- como argumento uma callback function
+    - A callback function passada como argumento da promise, recebe dois argumentos: `resolve` e `reject`:
+
+```jsx
+new Promise((resolve, reject) => {
+	console.log('Dentro da Promise');
+});
+
+	// RETORNA Dentro da Promise
+```
+
+- A função callback dentro da Promise é uma função *síncrona* e roda imediatamento dentro da call stack do Node.js. Portanto, executar o código acima com node já retorna imediatamente co conteúdo da função callback da promise.
+- Quando armazenamos essa promise em uma varíavel, o que acontece:
+
+```jsx
+const apiCall = new Promise((resolve, reject) => {
+});
+
+console.log(apiCall)
+/* RETORNA:
+
+Promise { <pending> }
+*/
+```
+
+O que isso quer dizer?
+
+Basicamente uma promise só é resolvida ou rejeitada a partir do momento em que executamos as funções (`resolve` ou `reject`) da function callback da promise. Ou seja, enquanto  não for executado o resolve ou reject a promise vai ficar pendente para ser resolvida.
+
+Veja:
+
+```jsx
+const apiCall = new Promise ((resolve, reject) => {
+  resolve('Success');
+});
+
+console.log(apiCall); //RETORNA Promise { 'Success' }
+```
+
+### Quais momentos fazem sentido para estar usando as promises?
+
+- O próprio JavaScript utiliza promises quando ele está executando tarefas muito pesadas, que podem levar muito tempo ou consumir muito recurso para serem executadas. Exemplos: Uma consulta em um DB. ⇒ Async/Await
+- Em chamadas API (por exemplo) assíncronas. ⇒ Async/Await
+
+**Criando exemplo de chamada a API para treinar:**
+
+- Pegando resultados da promise cm then:
+
+```jsx
+const apiCall = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve({ res: 'Success' });
+  }, 2000);
+});
+
+apiCall.then((resposta) => {
+  console.log(resposta);
+})
+
+//DEPOIS DE 2000ms RETORNA: { res: 'Success' }
+```
+
+- Nesse cenário, como pegamos erros?
+
+```jsx
+const apiCall = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    reject({ err: 'Error' });;
+  }, 2000);
+});
+
+apiCall
+  .then((resposta) => {
+    console.log(resposta);
+  })
+  .catch((erro) => {
+    console.log(erro);
+  })
+```
+
+Utilizamos o  `promise.catch()` para pegar o error e rejeitar a promise.
+
+**Segunda forma de trabalhar com promises (async/await):**
+
+```jsx
+async function run() {
+
+  const resposta = await apiCall;
+  console.log(resposta);
+}
+
+run(); //RETORNA { res: 'Success' }
+```
+
+**Pegando os erros com async e await:**
+
+Utilizando o bloco try - catch
+
+```jsx
+async function run() {
+  try {
+    const resposta = await apiCall;
+    console.log(resposta);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+run(); //RETORNA { err: 'Error' }
+```
+
+Essas são as duas formas de utilizar Promises em JS e possibilitar a execução de funções e métodos assíncronos. Porém, qual a melhor forma de utilizar essas formas?
+
+- Quando estamos utilizando a sintaxe do .then e . catch, nosso código não fica travado. Portanto, quando executamos um bloco de .then e .catch para manipular a promise, a função callback desses métodos são jogadas para a queue stack e é resolvida em background. Sendo assim, qualquer código seguido do bloco será executado:
+
+```jsx
+const apiCall = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    reject({ err: 'Error' });
+  }, 2000);
+});
+
+apiCall
+  .then((resposta) => {
+    console.log(resposta);
+  })
+  .catch((erro) => {
+    console.log(erro);
+  })
+
+  console.log('Depois da promise...');
+
+/* RETORNA 
+
+Depois da promise...
+{ res: 'Success' }
+
+*/
+```
+
+O `log` após a promise executou primeiro, não esperando a promise ser resolvida para executar o restante de código.
+
+- Portanto, em situações que precisamos do valor da Promise, como uma chamada API, por exemplo, não podemos utilizar esse tipo de estratégia. Portanto, utilizaremos o método do async / await para fazer chamadas em DB e chamadas na API
