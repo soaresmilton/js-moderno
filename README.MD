@@ -756,3 +756,41 @@ console.log(findIndex); //RETORNA 2
 
 ---
 
+## Aula 11: HOFs - .some e .every
+
+Aplicável em arays;
+
+Da mesma forma que demais HOFs, recebe uma callback function como parametro
+
+### .some():
+
+Verifica se **algum** elemento de um array satisfaz a condição passada na função callback. Este método retorna um *Booleano.:*
+
+```jsx
+const array = [
+  { name: 'iPhone', price: 5000, quantity: 2 },
+  { name: 'MacBook Pro', price: 20000, quantity: 1 },
+  { name: 'Magic Mouse', price: 1000, quantity: 5 }
+];
+
+const some = array.some((product) => product.price > 1000);
+
+console.log({ some }); //RETORNA { some: true }
+```
+
+- Muito importante entender que retorna TRUE se pelo menos um item do array satisfazer a condição.
+
+### .every()
+
+Funciona da mesma forma que o método `.some()` porém, verifica se **todos** elementos do array satisfaz a condição passada na callback function:
+
+```jsx
+const array = [
+  { name: 'iPhone', price: 5000, quantity: 2 },
+  { name: 'MacBook Pro', price: 20000, quantity: 1 },
+  { name: 'Magic Mouse', price: 1000, quantity: 5 }
+];
+
+const every = array.every(product => product.price < 1000);
+console.log({ every }); // RETORNA { some: false }
+```
