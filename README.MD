@@ -608,3 +608,69 @@ novoNomeDaFuncao('Miltinho');
 ```
 
 ---
+
+## Aula 09: Funções Helpers
+
+### .includes()
+
+Verifica se dentro de uma **string** ou um **array** existe "alguma coisa" que a gente esteja passando para ela. Por exemplo:
+
+```jsx
+const tech = "Node.js";
+
+const includes = tech.includes('.');
+console.log({ includes }); // RETORNA { includes: true }
+```
+
+Ou seja, dentro da string "Node.js" representada por `tech` existe a string '.'
+
+Uma característica importante é que, assim como em todo o JS, o `.includes()` também é case sensitive, ou seja:
+
+```jsx
+const tech = "Node.js";
+
+const includes = tech.includes('node');
+console.log({ includes }); //RETORNA { includes: false }
+```
+
+**Em arrays:**
+
+```jsx
+const tech = "Node.js";
+const arr = ['Node.js', 'React', 'Typescript']
+
+const includesString = tech.includes('Node');
+const includesArray = arr.includes('Node')
+console.log({ includesArray }); //RETORNA { includesArray: false }
+```
+
+Em caso de arrays, o `.includes()` encontra o valor por inteiro de determinada posição desse array, então, para retornar `true` temos que:
+
+```jsx
+const tech = "Node.js";
+const arr = ['Node.js', 'React', 'Typescript']
+
+const includesString = tech.includes('Node');
+const includesArray = arr.includes('Node.js')
+console.log({ includesArray }); //RETORNA { includesArray: true }
+```
+
+### .startsWith
+
+Verifica qual caractere inicia uma determinada string, retornando um valor Booleano. Não funciona para *arrays.*
+
+```jsx
+const tech = "Node.js";
+const startsWith = tech.startsWith('N');
+console.log({ startsWith }); //RETORNA { startsWith: true }
+```
+
+### .endsWith()
+
+Operação inversa ao `.startsWith()` , verificando qual são os caracteres que determinada string termina. 
+
+```jsx
+const tech = "Node.js";
+const endsWith = tech.endsWith('.js');
+console.log({ endsWith }); // RETORNA { endsWith: true }
+```
